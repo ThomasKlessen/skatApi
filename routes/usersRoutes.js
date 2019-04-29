@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const UserController = require('../controller/userCtrl')
 
-router.post('/', UserController.getAll);
+router.post('/getAll', UserController.getAll);
 
 module.exports = router;

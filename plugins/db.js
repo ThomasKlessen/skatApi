@@ -17,4 +17,7 @@ const dbMiddleWare = function (req, res, next) {
     next();
 }
 
-module.exports = dbMiddleWare
+module.exports = {
+    dbMiddleWare,
+    db
+}
