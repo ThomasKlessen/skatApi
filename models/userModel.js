@@ -1,5 +1,5 @@
 'use strict';
-const {db} = require('../plugins/db')
+const {db} = require('../middleware/postgres')
 const crypto    = require('crypto');
 const jwt      = require('jsonwebtoken');
 const config = require('../config')

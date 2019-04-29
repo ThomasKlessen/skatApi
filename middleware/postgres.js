@@ -10,14 +10,14 @@ const initOptions = {
 const pgp = require('pg-promise')(initOptions);
 const config = require('../config')
 
-const db = pgp(config.postgres);
+const postgres = pgp(config.postgres);
 
-const dbMiddleWare = function (req, res, next) {
-    req.db = db;
+const postgresInit = function (req, res, next) {
+    req.db = postgres;
     next();
 }
 
 module.exports = {
-    dbMiddleWare,
-    db
+    postgresInit,
+    db: postgres
 }

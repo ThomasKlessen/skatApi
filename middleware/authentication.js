@@ -4,7 +4,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy   = passportJWT.Strategy;
 const config = require('../config')
 
-const register = function (passport) {
+const registerStrategies = function (passport) {
     const options = {
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: config.jwtSecret
@@ -15,9 +15,9 @@ const register = function (passport) {
 
 }
 
-const loginMiddleWare = function (req, res, next) {
-    register(passport)
+const authentication = function (req, res, next) {
+    registerStrategies(passport)
     passport.initialize()(req, res, next)
 }
 
-module.exports = loginMiddleWare
+module.exports = authentication
