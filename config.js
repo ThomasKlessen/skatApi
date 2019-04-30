@@ -1,16 +1,14 @@
-const defaultPort = 5432;
-const defaultHost = 'localhost';
-const jwtSecret = 'myJwtSecret'
+// You should use environment parameters to setup your config!!!
 
 const config = {
     postgres: {
-        host: process.env.DB_HOST || defaultHost,
-        port: process.env.DB_PORT || defaultPort,
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
         database: process.env.DB_NAME || 'YOUR_DB_Name',
         user: process.env.DB_USER || 'YOUR_DB_User',
         password: process.env.DB_PASSWORD || 'YOUR_DB_Password',
     },
-    jwtSecret: process.env.JWT_SECRET || jwtSecret
+    jwtSecret: process.env.JWT_SECRET || 'YOUR_JWT_SECRET'
 }
 
 module.exports = config
