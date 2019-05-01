@@ -1,4 +1,4 @@
-const crypto = require('../wrapper/crypto')
+const crypto = require('../src/wrapper/crypto')
 
 describe('crypto wrapper', () => {
     it('should have getHash function', () => {

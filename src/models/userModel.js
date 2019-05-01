@@ -1,7 +1,7 @@
 'use strict';
-const {db} = require('../middleware/postgres')
+const db = require('../wrapper/postgres')
 const jwt      = require('jsonwebtoken');
-const config = require('../config')
+const config = require('../../config')
 const crypto = require('../wrapper/crypto')
 
 class userModel {
@@ -21,9 +21,9 @@ class userModel {
         return db
             .one("SELECT * FROM users WHERE username = $1", [username])
             .then(user => {
-                const token = jwt.sign(user, config.jwtSecret);
                 const hash = crypto.getHash(password, user.salt)
                 if (hash === user.hash) {
+                    const token = jwt.sign(user, config.jwtSecret);
                     return Promise.resolve({token, user})
                 } else {
                     return Promise.reject({msg: 'wrong'})

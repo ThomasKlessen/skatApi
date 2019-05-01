@@ -8,16 +8,8 @@ const initOptions = {
     }
 };
 const pgp = require('pg-promise')(initOptions);
-const config = require('../config')
+const config = require('../../config')
 
 const postgres = pgp(config.postgres);
 
-const postgresInit = function (req, res, next) {
-    req.db = postgres;
-    next();
-}
-
-module.exports = {
-    postgresInit,
-    db: postgres
-}
+module.exports = postgres
