@@ -1,5 +1,8 @@
+const mockDb = {
+    any: jest.fn()
+}
 jest.mock('../src/wrapper/crypto')
-const postgres = jest.mock('../src/wrapper/postgres')
+jest.mock('../src/wrapper/postgres',() => mockDb)
 const userModel = require('../src/models/userModel')
 
 describe('MyTest', () => {
@@ -8,10 +11,12 @@ describe('MyTest', () => {
     })
 
     it('should get all users', done => {
+        const dbResponse = [{username: 'Admin'}]
+        mockDb.any.mockReturnValueOnce(Promise.resolve(dbResponse))
         userModel
             .getAll()
             .then(value => {
-                expect(value).toBe('SELECT * FROM users;')
+                expect(value).toBe(dbResponse)
                 done()
             })
     })
