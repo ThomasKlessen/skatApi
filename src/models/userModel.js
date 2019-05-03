@@ -5,28 +5,19 @@ const config = require('../../config')
 const crypto = require('../wrapper/crypto')
 
 class userModel {
-    constructor (user) {
-        this.user = user;
-    }
-
     static getAll () {
         return db.any('SELECT * FROM users;')
     }
 
-    static hash () {
-        return crypto.getHash('password', 'salt')
-    }
-
     static login ({username, password}) {
-        return db
-            .one("SELECT * FROM users WHERE username = $1", [username])
+        return db.one("SELECT * FROM users WHERE username = $1", [username])
             .then(user => {
                 const hash = crypto.getHash(password, user.salt)
                 if (hash === user.hash) {
                     const token = jwt.sign(user, config.jwtSecret);
                     return Promise.resolve({token, user})
                 } else {
-                    return Promise.reject({msg: 'wrong'})
+                    return Promise.reject(new Error('Login not valid'))
                 }
             })
 
