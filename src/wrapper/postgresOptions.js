@@ -1,9 +1,12 @@
-module.exports = {
+const monitor = require('pg-monitor')
+const DbError = require('../errors/dbErrors')
+
+const postgresOptions = {
     capSQL: true,
-    connect () {
-        console.log('DB connected')
-    },
-    disconnect () {
-        console.log('DB disconnected')
+    error(err, e) {
+        monitor.error(err, e);
     }
-};
+}
+monitor.attach(postgresOptions)
+
+module.exports = postgresOptions;
