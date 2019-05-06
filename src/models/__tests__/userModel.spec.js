@@ -8,6 +8,7 @@ const mockDb = {
 jest.mock('../../wrapper/crypto')
 jest.mock('../../wrapper/postgres',() => mockDb)
 const userModel = require('../userModel')
+const userQuery = require('../userQuery')
 
 describe('userModel', () => {
     it('should get all users', done => {
@@ -67,14 +68,11 @@ describe('userModel', () => {
                 username: 'user',
                 password: 'password'
             }
-            const dbResponse = {
-                username: 'Admin',
-                hash: 'invalidHash'
-            }
             userModel
                 .register(loginInformation)
                 .then(() => {
-                    expect(mockDb.none).toBeCalledWith('INSERT INTO users(username, hash, salt) VALUES($1, $2, $3)', ["user", "hash", "salt"])
+                    expect(mockDb.none)
+                        .toBeCalledWith(userQuery.register, ["user", "hash", "salt"])
                     done()
                 })
         })
