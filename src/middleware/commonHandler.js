@@ -1,6 +1,13 @@
 const defaultHandler = function (req, res, next) {
-    const sendJson = data => res.json(data)
-    const sendError = err => res.json(err)
+    const sendJson = data => res.json({
+        success: true,
+        data
+    })
+    const sendError = err => res.json({
+        success: false,
+        err: err.message,
+        type: err.type
+    })
 
     res.sendJson = sendJson
     res.sendError = sendError
