@@ -32,16 +32,13 @@ exports.up = function (db) {
             on users (id);
 
         create unique index if not exists users_username_uindex
-            on users (username);
-            `
+            on users (username);`
 
     return db.runSql(query)
 }
 
 exports.down = function (db) {
-    const query = `
-        DROP table users;
-        `
+    const query = `DROP table users;`
     return db.runSql(query)
 }
 
