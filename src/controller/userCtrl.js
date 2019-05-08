@@ -4,7 +4,8 @@ const userError = require('../errors/userErrors')
 
 const userController = {
     getAll () {
-        return userModel.getAll()
+        return userModel
+            .getAll()
             .catch(err => {
                 if (err instanceof dbError) {
                     return Promise.reject(err)

@@ -2,19 +2,15 @@
 const userModel = require('../models/userModel')
 
 const authCtrl = {
+    register (user) {
+        return userModel
+            .register(user)
 
-    register (req, res) {
-        userModel
-            .register(req.body.user)
-            .then(res.sendJson)
-            .catch(res.sendError)
     },
 
-    login (req, res) {
-        userModel
-            .login(req.body.user)
-            .then(res.sendJson)
-            .catch(res.sendError)
+    login (user) {
+        return userModel
+            .login(user)
     },
 
 }
