@@ -1,4 +1,4 @@
-const config = require('../../../config')
+const config = require('../../config')
 const postgresOptions = require('../postgresOptions')
 const postgresInstance = {}
 const mockPGPromiseInstance = jest.fn(() => postgresInstance)

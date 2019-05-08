@@ -1,7 +1,7 @@
 'use strict';
 const db = require('../wrapper/postgres')
 const jwt      = require('jsonwebtoken');
-const config = require('../../config')
+const config = require('../config')
 const crypto = require('../wrapper/crypto')
 const userQuery = require('./userQuery')
 

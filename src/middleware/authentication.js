@@ -2,7 +2,7 @@ const passport = require('passport/lib')
 const passportJWT = require("passport-jwt/lib");
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy   = passportJWT.Strategy;
-const config = require('../../config')
+const config = require('../config')
 
 const registerStrategies = function (passport) {
     const options = {
