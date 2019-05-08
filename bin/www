@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-const app = require('../app')
+const app = require('../src/app')
 var debug = require('debug')('api:server');
 var http = require('http');
 
