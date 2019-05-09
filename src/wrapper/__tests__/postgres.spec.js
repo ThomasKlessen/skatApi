@@ -18,6 +18,8 @@ describe('postgres', () => {
     })
 
     it('returns the pgPromise instance', () => {
-        expect(postgres).toBe(postgresInstance)
+        expect(postgres.any).toBeDefined()
+        expect(postgres.one).toBeDefined()
+        expect(postgres.none).toBeDefined()
     })
 })

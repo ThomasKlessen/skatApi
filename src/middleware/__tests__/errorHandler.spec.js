@@ -7,18 +7,16 @@ const mockDefaultError = {
     status: 501
 }
 const res = {
-    json: jest.fn(),
-    locals: {
-        error: {}
-    },
+    sendError: jest.fn(),
     status: jest.fn()
 }
-const next = jest.fn()
+
+const errorHandler = require('../errorHandler')
+
 describe('defaultError', () => {
     it('should return error in development', () => {
-        defaultHandler(req, res, next)
-        defaultError(mockDefaultError, req, res)
         req.app.get.mockReturnValueOnce('development')
+        errorHandler(mockDefaultError, req, res)
         expect(req.app.get).toBeCalledWith('env')
         expect(res.sendError).toBeCalled()
 

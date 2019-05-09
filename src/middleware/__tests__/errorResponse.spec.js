@@ -1,6 +1,14 @@
-it('should add sendError to response', () => {
+const req = {}
+const res = {
+    json: jest.fn()
+}
+const next = jest.fn()
+
+const errorResponse = require('../errorResponse')
+
+it('should add sendJson to response', () => {
     const testData = {}
-    defaultHandler(req, res, next)
+    errorResponse(req, res, next)
     expect(next).toBeCalled()
     expect(res.sendError).toBeDefined()
     res.sendError(testData)
