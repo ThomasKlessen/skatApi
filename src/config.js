@@ -1,4 +1,4 @@
-// You should use environment parameters to setup your config!!!
+// You should use environment parameters to setup your config to be prepared for scaling!
 
 const config = {
     postgres: {
