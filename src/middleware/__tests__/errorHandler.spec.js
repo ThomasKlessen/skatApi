@@ -21,4 +21,11 @@ describe('defaultError', () => {
         expect(res.sendError).toBeCalled()
 
     })
+    it('should return no error in development', () => {
+        req.app.get.mockReturnValueOnce('production')
+        errorHandler({}, req, res)
+        expect(req.app.get).toBeCalledWith('env')
+        expect(res.sendError).toBeCalled()
+
+    })
 })

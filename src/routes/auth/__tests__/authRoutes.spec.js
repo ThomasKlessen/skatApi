@@ -11,10 +11,15 @@ const mockAuthController = {
 jest.mock('../../../controller/authCtrl', () => mockAuthController)
 jest.mock('express', () => mockExpress)
 
-const authRoutes = require('../authRoutes')
+require('../authRoutes')
+const postLogin = require('../postLogin')
+const postRegister = require('../postRegister')
 
 describe('authRoutes', () => {
-    it('should register login', () => {
-        expect(mockRouter.post).toHaveBeenCalledWith('/login')
+    it('should register postLogin', () => {
+        expect(mockRouter.post).toHaveBeenCalledWith('/login', postLogin)
+    })
+    it('should register postRegister', () => {
+        expect(mockRouter.post).toHaveBeenCalledWith('/register', postRegister)
     })
 })

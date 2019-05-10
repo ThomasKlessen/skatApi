@@ -1,7 +1,7 @@
 const UserController = require('../../controller/userCtrl')
 
 const postGetAll = (req, res) => {
-        UserController
+        return UserController
             .getAll()
             .then(res.sendJson)
             .catch(res.sendError)

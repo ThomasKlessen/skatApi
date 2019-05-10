@@ -7,7 +7,7 @@ const mockExpress = {
 const authRouter = {}
 const userRouter = {}
 jest.mock('../auth/authRoutes', () => authRouter)
-jest.mock('../user/usersRoutes', () => userRouter)
+jest.mock('../user/userRoutes', () => userRouter)
 jest.mock('express', () => mockExpress)
 
 const router = require('../router')

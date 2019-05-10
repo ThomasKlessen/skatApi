@@ -1,8 +1,15 @@
 const config = require('../../config')
 const postgresOptions = require('../postgresOptions')
-const postgresInstance = {}
+const postgresInstance = {
+    any: jest.fn(),
+    one: jest.fn(),
+    none: jest.fn()
+}
 const mockPGPromiseInstance = jest.fn(() => postgresInstance)
 const mockPGPromiseFactory = jest.fn(() => mockPGPromiseInstance)
+const mockDbErrors = function () {
+
+}
 jest.mock('pg-promise', () => mockPGPromiseFactory)
 const postgres = require('../postgres')
 
@@ -21,5 +28,48 @@ describe('postgres', () => {
         expect(postgres.any).toBeDefined()
         expect(postgres.one).toBeDefined()
         expect(postgres.none).toBeDefined()
+    })
+
+    it('should call pgp.any with all arguments', (done) => {
+        postgresInstance.any.mockReturnValueOnce(Promise.resolve())
+        postgres
+            .any(true, true)
+            .then(() => {
+                expect(postgresInstance.any).toHaveBeenCalledWith(true, true)
+                done()
+            })
+
+    })
+
+    it('should call pgp.one with all arguments', (done) => {
+        postgresInstance.one.mockReturnValueOnce(Promise.resolve())
+        postgres
+            .one(true, true)
+            .then(() => {
+                expect(postgresInstance.one).toHaveBeenCalledWith(true, true)
+                done()
+            })
+
+    })
+
+    it('should call pgp.none with all arguments', (done) => {
+        postgresInstance.none.mockReturnValueOnce(Promise.resolve())
+        postgres
+            .none(true, true)
+            .then(() => {
+                expect(postgresInstance.none).toHaveBeenCalledWith(true, true)
+                done()
+            })
+
+    })
+
+    it('should return dbError on reject', (done) => {
+        postgresInstance.none.mockReturnValueOnce(Promise.reject('Fehler'))
+        postgres
+            .none(false)
+            .catch(err => {
+                expect(err).toBeDefined()
+                done()
+            })
     })
 })
