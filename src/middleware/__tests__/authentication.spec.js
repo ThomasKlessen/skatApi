@@ -1,6 +1,7 @@
 const mockJwtStrategy = jest.fn()
 const mockPassport = {
-    initialize: jest.fn(() => () =>{})
+    initialize: jest.fn(() => () =>{}),
+    use: jest.fn()
 }
 jest.mock('passport/lib', () => mockPassport)
 jest.mock('./../passportStrategies/jwtStrategy', () => mockJwtStrategy)
@@ -12,6 +13,6 @@ describe('authentication', () => {
     })
     it('should call jwtStrategy with passport', () => {
         authentication()
-        expect(mockJwtStrategy).toBeCalledWith(mockPassport)
+        expect(mockPassport.use).toBeCalledWith('jwt', mockJwtStrategy)
     })
 })

@@ -3,7 +3,7 @@ const jwtStrategy = require('./passportStrategies/jwtStrategy')
 
 const authentication = function (req, res, next) {
     const options = {}
-    jwtStrategy(passport)
+    passport.use('jwt', jwtStrategy)
     passport.initialize(options)(req, res, next)
 }
 

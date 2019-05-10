@@ -1,16 +1,13 @@
 const passportJWT = require("passport-jwt/lib");
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy   = passportJWT.Strategy;
+const jwtCallback = require('./jwtCallback')
 const config = require('../../config')
-
-const registerJwtStrategy = function (passport) {
-    const options = {
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: config.jwtSecret
-    }
-    passport.use(new JWTStrategy(options, (jwt, done) => {
-        return done(null, jwt)
-    }))
+const options = {
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: config.jwtSecret
 }
+const jwtStrategy = new JWTStrategy(options, jwtCallback)
 
-module.exports = registerJwtStrategy
+
+module.exports = jwtStrategy
