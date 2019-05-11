@@ -10,7 +10,8 @@ fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
 
 // create a rotating write stream
 var accessLogStream = rfs('access.log', {
-    interval: '1d', // rotate daily
+    initialRotation: true,
+    interval: '1h', // rotate hourly
     path: logDirectory
 })
 

@@ -1,8 +1,8 @@
 'use strict';
-const db = require('../wrapper/postgres')
+const db = require('../middleware/postgres/postgres')
 const jwt      = require('jsonwebtoken');
 const config = require('../config')
-const crypto = require('../wrapper/crypto')
+const crypto = require('../middleware/crypto/crypto')
 const userQuery = require('./userQuery')
 
 class userModel {

@@ -7,7 +7,7 @@ const errorHandler = require('./middleware/errorHandler')
 const authentication = require('./middleware/authentication')
 const apiRouter = require('./routes/router')
 const app = express()
-require('./wrapper/postgres')
+require('./middleware/postgres/postgres')
 
 app.use(require('express-status-monitor')())
 app.use(logger)

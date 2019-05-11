@@ -5,8 +5,8 @@ const mockDb = {
         return Promise.resolve(true)
     })
 }
-jest.mock('../../wrapper/crypto')
-jest.mock('../../wrapper/postgres',() => mockDb)
+jest.mock('../../middleware/crypto/crypto')
+jest.mock('../../middleware/postgres/postgres',() => mockDb)
 const userModel = require('../userModel')
 const userQuery = require('../userQuery')
 
