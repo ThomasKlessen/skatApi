@@ -6,7 +6,18 @@ const handleResults = data => {
 const autoCannon = require('autocannon')
 
 const instance = autoCannon({
-    url: 'http://localhost:3000',
+    url: 'http://localhost:3000/auth/login',
+    method: 'POST',
+    title: 'login',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+        user: {
+            username: "admin",
+            password: "admin"
+        }
+    }),
     connections: 10, //default
     pipelining: 1, // default
     duration: 10 // default

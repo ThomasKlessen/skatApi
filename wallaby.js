@@ -13,6 +13,8 @@ module.exports = function () {
             type: 'node'
         },
 
-        testFramework: 'jest'
+        testFramework: 'jest',
+
+        testEnvironment: 'node'
     };
 };

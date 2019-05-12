@@ -27,17 +27,17 @@ describe('postLogin', () => {
     it('should call sendJson if success', (done) => {
         mockAuthController.login.mockReturnValueOnce(Promise.resolve(true))
         postLogin(req, res)
-            .then(() => {
-                expect(res.sendJson).toHaveBeenCalledWith(true)
-                done()
-            })
+        setTimeout(() => {
+            expect(res.sendJson).toHaveBeenCalledWith(true)
+            done()
+        })
     })
     it('should call sendError if error', (done) => {
         mockAuthController.login.mockReturnValueOnce(Promise.reject(false))
         postLogin(req, res)
-            .then(() => {
-                expect(res.sendError).toHaveBeenCalledWith(false)
-                done()
-            })
+        setTimeout(() => {
+            expect(res.sendError).toHaveBeenCalledWith(false)
+            done()
+        })
     })
 })

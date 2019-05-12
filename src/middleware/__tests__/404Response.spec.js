@@ -1,5 +1,5 @@
 const next = jest.fn()
-const handle404 = require('../404Response')
+const handle404 = require('../response404')
 
 describe('404Response', () => {
     it('should call next with 404 status error', () => {

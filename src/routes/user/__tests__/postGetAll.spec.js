@@ -23,17 +23,17 @@ describe('postGetAll', () => {
     it('should call sendJson if success', (done) => {
         mockUserController.getAll.mockReturnValueOnce(Promise.resolve(true))
         postGetAll(req, res)
-            .then(() => {
-                expect(res.sendJson).toHaveBeenCalledWith(true)
-                done()
-            })
+        setTimeout(() => {
+            expect(res.sendJson).toHaveBeenCalledWith(true)
+            done()
+        })
     })
     it('should call sendError if error', (done) => {
         mockUserController.getAll.mockReturnValueOnce(Promise.reject(false))
         postGetAll(req, res)
-            .then(() => {
-                expect(res.sendError).toHaveBeenCalledWith(false)
-                done()
-            })
+        setTimeout(() => {
+            expect(res.sendError).toHaveBeenCalledWith(false)
+            done()
+        })
     })
 })
