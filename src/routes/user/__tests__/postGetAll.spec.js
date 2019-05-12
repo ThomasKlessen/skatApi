@@ -13,11 +13,10 @@ const res = {
 const postGetAll = require('../postGetAll')
 
 describe('postGetAll', () => {
-    it('should call UserController.getAll', (done) => {
+    it('should call UserController.getAll', () => {
         mockUserController.getAll.mockReturnValueOnce(Promise.resolve(true))
         postGetAll(req, res)
         expect(mockUserController.getAll).toHaveBeenCalledTimes(1)
-        done()
 
     })
     it('should call sendJson if success', (done) => {
