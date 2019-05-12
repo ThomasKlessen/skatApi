@@ -1,0 +1,1 @@
+{"tags":{"allowUnknownTags":true,"dictionaries":["jsdoc"]},"plugins":["plugins/markdown"],"templates":{"cleverLinks":false,"monospaceLinks":true,"useLongnameInNav":false,"default":{"layoutFile":"/home/thkle/git/Skat/api/node_modules/jsdoc-generator/app/jsdoc/layout.tmpl"}},"opts":{"encoding":"utf8","private":true,"recurse":true}}
