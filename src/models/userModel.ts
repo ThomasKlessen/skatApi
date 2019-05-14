@@ -1,9 +1,9 @@
 'use strict';
-const db = require('../middleware/postgres/postgres')
-const jwt      = require('jsonwebtoken');
-const config = require('../config')
-const crypto = require('../middleware/crypto/crypto')
-const userQuery = require('./userQuery')
+import db from '../middleware/postgres/postgres'
+import jwt from 'jsonwebtoken'
+import config from '../config'
+import crypto from '../middleware/crypto/crypto'
+import userQuery from './userQuery'
 
 class userModel {
     static getAll () {
@@ -32,4 +32,4 @@ class userModel {
     }
 }
 
-module.exports = userModel
+export default userModel

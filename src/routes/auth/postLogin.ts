@@ -1,6 +1,6 @@
-const AuthController = require('../../controller/authCtrl')
+import AuthController from'../../controller/authCtrl'
 
-const postLogin = (req, res) => {
+const postLogin = (req:any, res:any) => {
      console.log(req.body)
      AuthController
         .login(req.body.user)
@@ -8,4 +8,4 @@ const postLogin = (req, res) => {
         .catch(res.sendError)
 }
 
-module.exports = postLogin
+export default postLogin

@@ -11,4 +11,4 @@ const config = {
     jwtSecret: process.env.JWT_SECRET || 'YOUR_JWT_SECRET'
 }
 
-module.exports = config
+export default config

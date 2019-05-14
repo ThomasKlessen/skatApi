@@ -1,4 +1,5 @@
-const UserController = require('../../controller/userCtrl')
+import UserController from '../../controller/userCtrl'
+import express from 'express'
 
 /**
  * @name postGetAll
@@ -7,11 +8,11 @@ const UserController = require('../../controller/userCtrl')
  * @description Get all users from database
  */
 
-const postGetAll = (req, res) => {
+const postGetAll = (req:express.Request, res:express.Response) => {
         UserController
             .getAll()
             .then(res.sendJson)
             .catch(res.sendError)
 }
 
-module.exports = postGetAll
+export default postGetAll

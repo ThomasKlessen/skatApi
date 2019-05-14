@@ -10,7 +10,7 @@ jest.mock('../auth/authRoutes', () => authRouter)
 jest.mock('../user/userRoutes', () => userRouter)
 jest.mock('express', () => mockExpress)
 
-const router = require('../router')
+const router = require('../apiRouter')
 
 describe('Router', () => {
     it('should export router', () => {

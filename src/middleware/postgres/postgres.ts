@@ -1,14 +1,15 @@
-const postgresOptions = require('./postgresOptions')
-const config = require('../../config')
-const pgp = require('pg-promise')(postgresOptions)
+import postgresOptions from './postgresOptions'
+import config from '../../config'
+import pgpFactory from 'pg-promise'
+import dbError from '../../errors/dbErrors'
+const pgp = pgpFactory(postgresOptions)
 const postgres = pgp(config.postgres)
-const dbError = require('../../errors/dbErrors')
 
-const handleDbError = err => {
+const handleDbError = (err:Error) => {
     return Promise.reject(new dbError())
 }
 
-module.exports = {
+export default {
     any () {
         return postgres
             .any(...arguments)

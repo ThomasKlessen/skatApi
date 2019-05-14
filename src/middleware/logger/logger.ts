@@ -1,7 +1,7 @@
-const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path')
-const rfs = require('rotating-file-stream')
+import morgan from 'morgan'
+import fs from 'fs'
+import path from 'path'
+import rfs from 'rotating-file-stream'
 
 const logDirectory = path.join(__dirname,'../../../', 'log')
 
@@ -9,7 +9,7 @@ const logDirectory = path.join(__dirname,'../../../', 'log')
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
 
 // create a rotating write stream
-var accessLogStream = rfs('access.log', {
+const accessLogStream = rfs('access.log', {
     initialRotation: true,
     interval: '1h', // rotate hourly
     path: logDirectory
@@ -18,4 +18,4 @@ var accessLogStream = rfs('access.log', {
 
 const logger = morgan('dev', { stream: accessLogStream })
 
-module.exports = logger
+export default logger

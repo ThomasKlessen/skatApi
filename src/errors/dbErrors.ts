@@ -5,4 +5,4 @@ class DbError extends Error {
     }
 }
 
-module.exports = DbError
+export default DbError

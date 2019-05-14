@@ -4,4 +4,4 @@ const userQuery = {
     register: `INSERT INTO users(username, hash, salt) VALUES($1, $2, $3);`
 }
 
-module.exports = userQuery
+export default userQuery

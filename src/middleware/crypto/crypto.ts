@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
 const cryptoWrapper = {
-    getHash(password, salt) {
+    getHash(password:string, salt:string) {
         return crypto
             .pbkdf2Sync(password, salt, 10000, 512, 'sha512')
             .toString('hex');
@@ -13,4 +13,4 @@ const cryptoWrapper = {
     }
 }
 
-module.exports = cryptoWrapper
+export default cryptoWrapper

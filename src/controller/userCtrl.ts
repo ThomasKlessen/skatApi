@@ -1,12 +1,12 @@
-const userModel = require('../models/userModel')
-const dbError = require('../errors/dbErrors')
-const userError = require('../errors/userErrors')
+import userModel from '../models/userModel'
+import dbError from '../errors/dbErrors'
+import userError from '../errors/userErrors'
 
 const userController = {
     getAll () {
         return userModel
             .getAll()
-            .catch(err => {
+            .catch((err:Error) => {
                 if (err instanceof dbError) {
                     return Promise.reject(err)
                 } else {
@@ -16,4 +16,4 @@ const userController = {
     }
 }
 
-module.exports = userController
+export default userController

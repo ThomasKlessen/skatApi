@@ -1,11 +1,11 @@
-const monitor = require('pg-monitor')
+import monitor from 'pg-monitor'
 
 const postgresOptions = {
     capSQL: true,
-    error(err, e) {
+    error(err:Error, e:any) {
         monitor.error(err, e);
     }
 }
 monitor.attach(postgresOptions)
 
-module.exports = postgresOptions;
+export default postgresOptions;

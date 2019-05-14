@@ -1,18 +1,18 @@
 "use strict"
-const userModel = require('../models/userModel')
+import userModel from '../models/userModel'
 
 const authCtrl = {
-    register (user) {
+    register (user:any) {
         return userModel
             .register(user)
 
     },
 
-    login (user) {
+    login (user:any) {
         return userModel
             .login(user)
     },
 
 }
 
-module.exports = authCtrl
+export default authCtrl
