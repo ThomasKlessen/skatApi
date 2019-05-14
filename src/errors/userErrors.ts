@@ -8,9 +8,8 @@ class UserError extends Error {
      * @constructor
      * @param msg
      */
-    constructor(msg) {
+    constructor(msg: string) {
         super(msg)
-        this.type = 'UserError'
     }
 }
 

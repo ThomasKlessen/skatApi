@@ -1,28 +1,28 @@
 import postgresOptions from './postgresOptions'
 import config from '../../config'
-import pgpFactory from 'pg-promise'
-import dbError from '../../errors/dbErrors'
+import pgpFactory, {TQuery} from 'pg-promise'
+import DbError from '../../errors/dbErrors'
 const pgp = pgpFactory(postgresOptions)
 const postgres = pgp(config.postgres)
 
 const handleDbError = (err:Error) => {
-    return Promise.reject(new dbError())
+    return Promise.reject(new DbError(err.message))
 }
 
 export default {
-    any () {
+    any (query:TQuery, values?:any) {
         return postgres
-            .any(...arguments)
+            .any(query, values)
             .catch(handleDbError)
     },
-    one () {
+    one (query:TQuery, values?:any) {
         return postgres
-            .one(...arguments)
+            .one(query, values)
             .catch(handleDbError)
     },
-    none () {
+    none (query: TQuery, values?:any) {
         return postgres
-            .none(...arguments)
+            .none(query, values)
             .catch(handleDbError)
     }
 }

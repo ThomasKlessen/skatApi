@@ -1,4 +1,4 @@
-import passportJWT from 'passport-jwt/lib'
+import passportJWT from 'passport-jwt'
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy   = passportJWT.Strategy;
 import jwtCallback from './jwtCallback'

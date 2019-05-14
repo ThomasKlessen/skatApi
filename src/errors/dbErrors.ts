@@ -1,7 +1,6 @@
 class DbError extends Error {
-    constructor() {
-        super('DatabaseError')
-        this.type = 'POSTGRES_ERROR'
+    constructor(msg: string) {
+        super(msg)
     }
 }
 

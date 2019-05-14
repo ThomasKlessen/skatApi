@@ -10,6 +10,7 @@ class userModel {
         return db.any(userQuery.getAllUsers)
     }
 
+    // @ts-ignore
     static login ({username, password}) {
         return db
             .one(userQuery.getUserByName, [username])
@@ -24,7 +25,7 @@ class userModel {
             })
     }
 
-    static register (payload) {
+    static register (payload: any) {
         const { username, password } = payload
         const salt = crypto.generateSalt()
         const hash = crypto.getHash(password, salt)

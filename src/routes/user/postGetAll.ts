@@ -1,5 +1,4 @@
 import UserController from '../../controller/userCtrl'
-import express from 'express'
 
 /**
  * @name postGetAll
@@ -8,7 +7,7 @@ import express from 'express'
  * @description Get all users from database
  */
 
-const postGetAll = (req:express.Request, res:express.Response) => {
+const postGetAll = (req:any, res:any) => {
         UserController
             .getAll()
             .then(res.sendJson)

@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto'
 
 const cryptoWrapper = {
     getHash(password:string, salt:string) {

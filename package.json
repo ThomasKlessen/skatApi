@@ -13,7 +13,6 @@
     "doc": "node ./docs.js"
   },
   "dependencies": {
-    "@types/passport": "^1.0.0",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-status-monitor": "^1.2.5",
@@ -23,10 +22,12 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg-monitor": "^1.1.0",
-    "pg-promise": "^8.6.5",
-    "typescript": "^3.4.5"
+    "pg-promise": "^8.6.5"
   },
   "devDependencies": {
+    "typescript": "^3.4.5",
+    "@types/passport": "^1.0.0",
+    "@types/passport-jwt": "^3.0.1",
     "@types/express": "^4.16.1",
     "@types/jest": "^24.0.12",
     "@types/morgan": "^1.7.35",
