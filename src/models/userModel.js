@@ -1,34 +1,29 @@
 'use strict';
 const db = require('../middleware/postgres/postgres')
-const jwt      = require('jsonwebtoken');
-const config = require('../config')
-const crypto = require('../middleware/crypto/crypto')
 const userQuery = require('./userQuery')
+const errorCodes = require('../errors/errorCodes')
 
 class userModel {
     static getAll () {
         return db.any(userQuery.getAllUsers)
     }
 
-    static login ({username, password}) {
+    static getUserByName (username) {
         return db
             .one(userQuery.getUserByName, [username])
-            .then(user => {
-                const hash = crypto.getHash(password, user.salt)
-                if (hash === user.hash) {
-                    const token = jwt.sign(user, config.jwtSecret);
-                    return Promise.resolve({token, user})
-                } else {
-                    return Promise.reject(new Error('Login not valid'))
-                }
-            })
+            .catch(() => Promise.reject(errorCodes.USER_NOT_FOUND))
+    }
+
+    static createUser (payload) {
+        const {username, hash, salt} = payload
+        return db
+            .none(userQuery.createUser, [username, hash, salt])
+            .catch(() => Promise.reject(errorCodes.USER_NOT_CREATED))
     }
 
     static register (payload) {
-        const { username, password } = payload
-        const salt = crypto.generateSalt()
-        const hash = crypto.getHash(password, salt)
-        return db.none(userQuery.register, [username, hash, salt])
+
+
     }
 }
 

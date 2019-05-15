@@ -23,9 +23,7 @@ describe('defaultError', () => {
     })
     it('should return no error in development', () => {
         req.app.get.mockReturnValueOnce('production')
-        errorHandler({
-            status: 400
-        }, req, res)
+        errorHandler({}, req, res)
         expect(req.app.get).toBeCalledWith('env')
         expect(res.sendError).toBeCalled()
 

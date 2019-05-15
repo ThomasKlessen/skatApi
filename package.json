@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "migrate": "node_modules/db-migrate/bin/db-migrate",
+    "start": "nodemon server",
+    "migrate_up": "node_modules/db-migrate/bin/db-migrate -- up",
     "test": "node_modules/.bin/jest --watch",
     "benchmark": "node ./benchmarks/benchmark.js",
     "doc": "node ./docs.js"

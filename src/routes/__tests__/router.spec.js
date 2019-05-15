@@ -4,10 +4,10 @@ const mockRouter = {
 const mockExpress = {
     Router: () => mockRouter
 }
-const authRouter = {}
-const userRouter = {}
-jest.mock('../auth/authRoutes', () => authRouter)
-jest.mock('../user/userRoutes', () => userRouter)
+const mockAuthRouter = {}
+const mockUserRouter = {}
+jest.mock('../auth/authRoutes', () => mockAuthRouter)
+jest.mock('../user/userRoutes', () => mockUserRouter)
 jest.mock('express', () => mockExpress)
 
 const router = require('../router')
@@ -17,7 +17,7 @@ describe('Router', () => {
         expect(router).toBeDefined()
     })
     it('should use authRouter', () => {
-        expect(mockRouter.use).toHaveBeenCalledWith('/auth', authRouter)
+        expect(mockRouter.use).toHaveBeenCalledWith('/auth', mockAuthRouter)
     })
     it('should use usersRouter', () => {
         expect(mockRouter.use).toHaveBeenCalledTimes(2)
