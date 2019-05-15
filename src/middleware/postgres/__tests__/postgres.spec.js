@@ -1,5 +1,5 @@
-const config = require('../../../config')
-const postgresOptions = require('../postgresOptions')
+import config from '../../../config'
+import postgresOptions from '../postgresOptions'
 const postgresInstance = {
     any: jest.fn(),
     one: jest.fn(),
@@ -7,11 +7,9 @@ const postgresInstance = {
 }
 const mockPGPromiseInstance = jest.fn(() => postgresInstance)
 const mockPGPromiseFactory = jest.fn(() => mockPGPromiseInstance)
-const mockDbErrors = function () {
 
-}
 jest.mock('pg-promise', () => mockPGPromiseFactory)
-const postgres = require('../postgres')
+import postgres from '../postgres'
 
 describe('postgres', () => {
     it('should call pgPromise factory with postgresOptions', () => {
