@@ -11,7 +11,7 @@ const res = {
     status: jest.fn()
 }
 
-const errorHandler = require('../errorHandler')
+const errorHandler = require('../responses/unhandledErrorResponse')
 
 describe('defaultError', () => {
     it('should return error in development', () => {

@@ -1,4 +1,4 @@
-const errorResponse = function (req, res, next) {
+const failResponse = function (req, res, next) {
     const sendError = (err, message) => res.json({
         success: false,
         err: err,
@@ -10,4 +10,4 @@ const errorResponse = function (req, res, next) {
     next();
 }
 
-module.exports = errorResponse
+module.exports = failResponse
