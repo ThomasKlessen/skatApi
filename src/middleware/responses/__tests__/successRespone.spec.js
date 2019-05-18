@@ -4,7 +4,7 @@ const res = {
 }
 const next = jest.fn()
 
-const successResponse = require('../responses/successResponse')
+const successResponse = require('../successResponse')
 
 it('should add sendJson to response', () => {
     const testData = {}
