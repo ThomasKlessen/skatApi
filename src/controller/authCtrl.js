@@ -1,7 +1,8 @@
 "use strict"
+const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel')
 const errorCodes = require('../errors/errorCodes')
-const jwt      = require('jsonwebtoken');
+const ApiError = require('../errors/apiError')
 const config = require('../config')
 const crypto = require('../middleware/crypto/crypto')
 
@@ -21,16 +22,16 @@ const authCtrl = {
 
     login ({username, password}) {
         return userModel
-                .getUserByName(username)
-                .then(user => {
-                    const hash = crypto.getHash(password, user.salt)
-                    if (hash === user.hash) {
-                        const token = jwt.sign(user, config.jwtSecret);
-                        return Promise.resolve({token, user})
-                    } else {
-                        return Promise.reject(errorCodes.USER_NOT_FOUND)
-                    }
-                })
+            .getUserByName(username)
+            .then(user => {
+                const hash = crypto.getHash(password, user.salt)
+                if (hash === user.hash) {
+                    const token = jwt.sign(user, config.jwtSecret);
+                    return Promise.resolve({token, user})
+                } else {
+                    return Promise.reject(new ApiError(errorCodes.USER_NOT_FOUND))
+                }
+            })
     }
 
 }

@@ -1,18 +1,22 @@
 const mockUserModel = {
-    register: jest.fn(),
-    login: jest.fn()
+    createUser: jest.fn(),
+    getUserByName: jest.fn()
 }
 jest.mock('../../models/userModel', () => mockUserModel)
+const mockCrypto = jest.mock('../../middleware/crypto/crypto')
 const authCtrl = require('../authCtrl')
-const user = {}
+const user = {
+    username: 'admin'
+}
 
 describe('authController', () => {
     it('register should call userModel.register with same user', () => {
         authCtrl.register(user)
-        expect(mockUserModel.register).toBeCalledWith(user)
+        expect(mockUserModel.createUser).toBeCalledTimes(1)
     })
 
-    it('login should call userModel.login with same user', () => {
+    it('login should call userModel.getUserByName with same user', () => {
+
         authCtrl.login(user)
         expect(mockUserModel.login).toBeCalledWith(user)
     })
