@@ -25,6 +25,7 @@ const authCtrl = {
             .getUserByName(username)
             .then(user => {
                 const hash = crypto.getHash(password, user.salt)
+                console.log(hash)
                 if (hash === user.hash) {
                     const token = jwt.sign(user, config.jwtSecret);
                     return Promise.resolve({token, user})

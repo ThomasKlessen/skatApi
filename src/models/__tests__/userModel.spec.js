@@ -9,6 +9,7 @@ jest.mock('../../middleware/crypto/crypto')
 jest.mock('../../middleware/postgres/postgres',() => mockDb)
 const userModel = require('../userModel')
 const userQuery = require('../userQuery')
+const ApiError = require('../../errors/apiError')
 
 describe('userModel', () => {
     it('should get all users', done => {
@@ -25,54 +26,57 @@ describe('userModel', () => {
 
     describe('login function', () => {
         it('should return token and dbUser if valid', done => {
-            const loginInformation = {
-                username: 'user',
-                password: 'password'
-            }
-            const dbResponse = {
-                username: 'Admin',
-                hash: 'hash'
-            }
+            const username = 'user'
+            const dbResponse = {}
             mockDb.one.mockReturnValueOnce(Promise.resolve(dbResponse))
             userModel
-                .login(loginInformation)
-                .then(({token, user}) => {
-                    expect(token).toBeDefined()
+                .getUserByName(username)
+                .then(user => {
+                    expect(mockDb.one).toBeCalledWith(userQuery.getUserByName, [username])
                     expect(user).toBe(dbResponse)
                     done()
                 })
         })
 
-        it('should throw if password not valid', done => {
-            const loginInformation = {
-                username: 'user',
-                password: 'password'
-            }
-            const dbResponse = {
-                username: 'Admin',
-                hash: 'invalidHash'
-            }
-            mockDb.one.mockReturnValueOnce(Promise.resolve(dbResponse))
+        it('should throw ApiError if user not found', done => {
+            const username = 'user'
+            mockDb.one.mockReturnValueOnce(Promise.reject(false))
             userModel
-                .login(loginInformation)
+                .getUserByName(username)
                 .catch(err => {
-                    expect(err.message).toBe('Login not valid')
+                    expect(err).toBeInstanceOf(ApiError)
                     done()
                 })
         })
     })
 
-    describe('register', () => {
-        it('should register', done => {
+    describe('createUser', () => {
+        it('should createUser', done => {
             const loginInformation = {
                 username: 'user',
-                password: 'password'
+                hash: 'password',
+                salt: 'salt'
             }
             userModel
-                .register(loginInformation)
+                .createUser(loginInformation)
                 .then(() => {
-                    expect(mockDb.none)
-                        .toBeCalledWith(userQuery.register, ["user", "hash", "salt"])
+                    expect(mockDb.none).toBeCalledWith(userQuery.createUser, [loginInformation.username, loginInformation.hash, loginInformation.salt])
+                    done()
+                })
+        })
+
+        it('should throw ApiError if user not created', done => {
+            const username = 'user'
+            mockDb.none.mockReturnValueOnce(Promise.reject(false))
+            const loginInformation = {
+                username: 'user',
+                hash: 'password',
+                salt: 'salt'
+            }
+            userModel
+                .createUser(loginInformation)
+                .catch(() => {
+                    expect(mockDb.none).toBeCalledWith(userQuery.createUser, [loginInformation.username, loginInformation.hash, loginInformation.salt])
                     done()
                 })
         })

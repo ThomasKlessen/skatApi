@@ -12,7 +12,7 @@ class userModel {
     static getUserByName (username) {
         return db
             .one(userQuery.getUserByName, [username])
-            .catch(err => Promise.reject(new ApiError(errorCodes.USER_NOT_FOUND)))
+            .catch(() => Promise.reject(new ApiError(errorCodes.USER_NOT_FOUND)))
     }
 
     static createUser (payload) {
@@ -20,11 +20,6 @@ class userModel {
         return db
             .none(userQuery.createUser, [username, hash, salt])
             .catch(() => Promise.reject(new ApiError(errorCodes.USER_NOT_CREATED)))
-    }
-
-    static register (payload) {
-
-
     }
 }
 

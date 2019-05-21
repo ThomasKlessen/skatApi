@@ -7,8 +7,8 @@ const mockDefaultError = {
     status: 501
 }
 const res = {
-    sendError: jest.fn(),
-    status: jest.fn()
+    status: jest.fn(),
+    json: jest.fn()
 }
 
 const errorHandler = require('../unhandledErrorResponse')
@@ -18,14 +18,14 @@ describe('defaultError', () => {
         req.app.get.mockReturnValueOnce('development')
         errorHandler(mockDefaultError, req, res)
         expect(req.app.get).toBeCalledWith('env')
-        expect(res.sendError).toBeCalled()
+        expect(res.json).toBeCalled()
 
     })
     it('should return no error in development', () => {
         req.app.get.mockReturnValueOnce('production')
         errorHandler({}, req, res)
         expect(req.app.get).toBeCalledWith('env')
-        expect(res.sendError).toBeCalled()
+        expect(res.json).toBeCalled()
 
     })
 })

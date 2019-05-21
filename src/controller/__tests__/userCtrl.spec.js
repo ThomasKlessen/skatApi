@@ -1,7 +1,6 @@
 const mockUserModel = {
     getAll: jest.fn()
 }
-const dbError = require('../../errors/dbErrors')
 jest.mock('../../models/userModel', () => mockUserModel)
 const userCtrl = require('../userCtrl')
 
@@ -23,7 +22,7 @@ describe('userController', () => {
     })
 
     it('getAll should pipe dbErrors', (done) => {
-        const testDbError = new dbError('DB_ERROR')
+        const testDbError = {}
         mockUserModel.getAll.mockReturnValueOnce(Promise.reject(testDbError))
         userCtrl
             .getAll()
